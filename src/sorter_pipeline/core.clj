@@ -15,6 +15,7 @@
   (str (Files/createTempDirectory "lambdacd" (into-array FileAttribute []))))
 
 (defn -main [& args]
+  (lambdacd-git/init-ssh!)
   (let [;; the home dir is where LambdaCD saves all data.
         ;; point this to a particular directory to keep builds around after restarting
         home-dir (create-temp-dir)

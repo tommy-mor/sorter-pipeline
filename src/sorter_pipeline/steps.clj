@@ -14,6 +14,22 @@
         ref (or revision repo-branch)]
     (lambdacd-git/clone ctx repo-uri ref cwd)))
 
+(defn print-step [args ctx]
+  {:status :success
+   :details {:label "epic"
+             :raw (str (prn-str args)
+                       "--"
+                       (prn-str ctx))}})
+
+(defn lein-test [{cwd :cwd} ctx]
+  (shell/bash ctx cwd "lein test"))
+
+(defn lein-build [{cwd :cwd} ctx]
+  (shell/bash ctx cwd "lein uberjar"))
+
+(defn deploy [{cwd :cwd} ctx]
+  (shell/bash ctx (str cwd "/target") "cp *-standalone.jar /root/sorter.jar && java -jar /root/sorter.jar &"))
+
 
 
 

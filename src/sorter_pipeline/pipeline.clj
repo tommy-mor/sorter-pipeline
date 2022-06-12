@@ -11,4 +11,7 @@
      wait-for-repo)
     (with-workspace
       clone
-      some-step-that-echos-foo)))
+      some-step-that-echos-foo
+      print-step
+      lein-test
+      lein-build)))
