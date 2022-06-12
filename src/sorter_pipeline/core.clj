@@ -5,11 +5,13 @@
     [org.httpkit.server :as http-kit]
     [lambdacd.runners :as runners]
     [lambdacd.core :as lambdacd]
-    [clojure.tools.logging :as log])
+    [clojure.tools.logging :as log]
+    [lambdacd-git.core :as lambdacd-git])
   (:import
    (java.nio.file.attribute FileAttribute)
    (java.nio.file Files LinkOption))
   (:gen-class))
+
 
 (defn- create-temp-dir []
   (str (Files/createTempDirectory "lambdacd" (into-array FileAttribute []))))
