@@ -1,5 +1,22 @@
 (ns sorter-pipeline.steps
-  (:require [lambdacd.steps.shell :as shell]))
+  (:require [lambdacd.steps.shell :as shell]
+            [lambdacd-git.core :as lambdacd-git]))
+
+(def repo-uri "git@github.com:tommy-mor/dtorter.git")
+(def repo-branch "main")
+
+(defn wait-for-repo [args ctx]
+  (lambdacd-git/wait-for-git ctx repo-uri :ref (str "refs/heads/" repo-branch)))
+
+(defn clone [args ctx]
+  (let [revision (:revision args)
+        cwd (:cwd args)
+        ref (or revision repo-branch)]
+    (lambdacd-git/clone ctx repo-uri ref cwd)))
+
+
+
+
 
 (defn some-step-that-does-nothing [args ctx]
   {:status :success})

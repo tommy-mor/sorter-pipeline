@@ -6,8 +6,9 @@
     [lambdacd.runners :as runners]
     [lambdacd.core :as lambdacd]
     [clojure.tools.logging :as log])
-  (:import (java.nio.file.attribute FileAttribute)
-    (java.nio.file Files LinkOption))
+  (:import
+   (java.nio.file.attribute FileAttribute)
+   (java.nio.file Files LinkOption))
   (:gen-class))
 
 (defn- create-temp-dir []
@@ -17,8 +18,8 @@
   (let [;; the home dir is where LambdaCD saves all data.
         ;; point this to a particular directory to keep builds around after restarting
         home-dir (create-temp-dir)
-        config   {:home-dir home-dir
-                  :name     "sorter pipeline"}
+        config {:home-dir home-dir
+                :name     "sorter pipeline"}
         ;; initialize and wire everything together
         pipeline (lambdacd/assemble-pipeline pipeline/pipeline-def config)
         ;; create a Ring handler for the UI
