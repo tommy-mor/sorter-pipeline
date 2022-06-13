@@ -17,12 +17,15 @@
   (str (Files/createTempDirectory "lambdacd" (into-array FileAttribute []))))
 
 (defn -main [& args]
-  (lambdacd-git/init-ssh!)
   (let [;; the home dir is where LambdaCD saves all data.
         ;; point this to a particular directory to keep builds around after restarting
         home-dir (create-temp-dir)
         config {:home-dir home-dir
-                :name     "sorter pipeline"}
+                :name     "sorter pipeline"
+                :git {:ssh {:use-agent true
+                            :known-hosts-files ["/root/.ssh/known_hosts"]
+ 		            :strict-host-key-checking "no"
+                            }}}
         ;; initialize and wire everything together
         pipeline (lambdacd/assemble-pipeline pipeline/pipeline-def config)
         ;; create a Ring handler for the UI

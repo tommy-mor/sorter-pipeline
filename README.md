@@ -1,6 +1,9 @@
 # sorter-pipeline
 
 A continuous delivery pipeline for FIXME
+must convert ssh key from normal with
+   ``ssh-keygen -p -m pem -f ~/id_rsa``
+
 
 ## Usage
 
