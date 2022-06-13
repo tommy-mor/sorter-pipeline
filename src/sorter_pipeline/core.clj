@@ -6,7 +6,9 @@
     [lambdacd.runners :as runners]
     [lambdacd.core :as lambdacd]
     [clojure.tools.logging :as log]
-    [lambdacd-git.core :as lambdacd-git])
+    [lambdacd-git.core :as lambdacd-git]
+    [ring.middleware.basic-authentication :refer [wrap-basic-authentication]])
+
   (:import
    (java.nio.file.attribute FileAttribute)
    (java.nio.file Files LinkOption))
@@ -15,6 +17,9 @@
 
 (defn- create-temp-dir []
   (str (Files/createTempDirectory "lambdacd" (into-array FileAttribute []))))
+
+(defn authenticated? [name pass]
+  (and (= pass "ToHiprAW3vAaVW") (= name "Operate6993")))
 
 (defn -main [& args]
   (let [;; the home dir is where LambdaCD saves all data.
@@ -35,4 +40,4 @@
     ;; there are other runners and you can define your own as well.
     (runners/start-one-run-after-another pipeline)
     ;; start the webserver to serve the UI
-    (http-kit/run-server app {:port 8080})))
+    (http-kit/run-server (wrap-basic-authentication app authenticated?) {:port 8081})))

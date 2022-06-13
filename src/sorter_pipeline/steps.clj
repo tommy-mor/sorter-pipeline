@@ -28,9 +28,15 @@
   (shell/bash ctx cwd "lein uberjar"))
 
 (defn deploy [{cwd :cwd} ctx]
-  (shell/bash ctx (str cwd "/target") "cp *-standalone.jar /root/sorter.jar && java -jar /root/sorter.jar &"))
+  (shell/bash ctx (str cwd "/target") "cp *-standalone.jar /root/sorter.jar"))
 
+(defn kill-old-proc [args ctx]
+  (-> (shell/bash ctx "/" "screen -XS dtorter quit")
+      (assoc :status :success)))
 
+(defn run-new-proc [args ctx]
+  (-> (shell/bash ctx "/root" "screen -S dtorter -d -m java -jar sorter.jar")))
+  
 
 
 

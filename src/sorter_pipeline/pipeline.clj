@@ -14,4 +14,8 @@
       some-step-that-echos-foo
       print-step
       lein-test
-      lein-build)))
+      lein-build
+      deploy
+      kill-old-proc
+      run-new-proc)))
+
