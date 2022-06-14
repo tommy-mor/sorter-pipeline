@@ -11,7 +11,9 @@
      wait-for-repo)
     (with-workspace
       clone
-      some-step-that-echos-foo
-      print-step
-      lein-test
-      lein-build)))
+      build-frontend
+      lein-build
+      deploy
+      kill-old-proc
+      run-new-proc)))
+
