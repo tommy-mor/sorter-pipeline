@@ -24,11 +24,15 @@
 (defn lein-test [{cwd :cwd} ctx]
   (shell/bash ctx cwd "lein test"))
 
+(defn build-frontend [{cwd :cwd} ctx]
+  (shell/bash ctx cwd "bb build-frontend"))
+
 (defn lein-build [{cwd :cwd} ctx]
   (shell/bash ctx cwd "lein uberjar"))
 
-(defn deploy [{cwd :cwd} ctx]
-  (shell/bash ctx (str cwd "/target") "cp *-standalone.jar /root/sorter.jar && java -jar /root/sorter.jar &"))
+(defn deploy [{cwd :cwd} ctx] 
+  ;; TODO run these in named screen session
+  (shell/bash ctx (str cwd "/target") "cp *-standalone.jar /root/sorter.jar && java -jar /root/sorter.jar &") ) 
 
 
 
