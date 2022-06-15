@@ -12,6 +12,7 @@
     (with-workspace
       clone
       build-frontend
+      check-js-assets
       lein-build
       deploy
       kill-old-proc

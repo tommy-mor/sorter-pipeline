@@ -27,6 +27,11 @@
 (defn build-frontend [{cwd :cwd} ctx]
   (shell/bash ctx cwd "bb build-frontend"))
 
+(defn check-js-assets [{cwd :cwd} ctx]
+  (shell/bash ctx cwd "tree ."))
+
+
+
 (defn lein-build [{cwd :cwd} ctx]
   (shell/bash ctx cwd "lein uberjar"))
 
